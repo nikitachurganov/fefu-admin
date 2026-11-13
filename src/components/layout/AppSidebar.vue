@@ -9,16 +9,14 @@
   >
     <!-- Sider Header -->
     <div class="sider-header" :class="{ 'is-collapsed': collapsed }">
-      <!-- 1. Expanded Header (All variants) -->
+      <!-- Expanded Header -->
       <template v-if="!collapsed">
         <div class="logo-wrapper">
           <img src="../../assets/figma/logo.png" alt="FEFU One" class="logo-img" />
           <span class="logo-title">FEFU One</span>
         </div>
 
-        <!-- In Variants 2 & 3: Collapse button on the right of logo -->
         <a-tooltip
-          v-if="variant === 2 || variant === 3"
           title="Свернуть меню"
           placement="bottom"
         >
@@ -37,19 +35,13 @@
         </a-tooltip>
       </template>
 
-      <!-- 2. Collapsed Header -->
+      <!-- Collapsed Header: Toggle button with background INSTEAD of logo -->
       <template v-else>
-        <!-- Variant 1: Logo only at the top (Toggle button is at the bottom) -->
-        <div v-if="variant === 1" class="logo-wrapper is-collapsed">
-          <img src="../../assets/figma/logo.png" alt="FEFU One" class="logo-img" />
-        </div>
-
-        <!-- Variant 2: Toggle button with background INSTEAD of logo -->
-        <div v-else-if="variant === 2" class="variant2-collapsed-header">
+        <div class="collapsed-header">
           <a-tooltip title="Развернуть меню" placement="right">
             <button
               type="button"
-              class="variant2-toggle-btn-with-bg"
+              class="toggle-btn-with-bg"
               aria-label="Развернуть меню"
               @click="toggleCollapsed"
             >
@@ -59,30 +51,6 @@
                 class="toggle-icon rotate-180"
               />
             </button>
-          </a-tooltip>
-        </div>
-
-        <!-- Variant 3: Logo by default, hover on logo reveals toggle button -->
-        <div
-          v-else-if="variant === 3"
-          class="variant3-hover-box"
-          @click="toggleCollapsed"
-        >
-          <a-tooltip title="Развернуть меню" placement="right">
-            <div class="variant3-inner">
-              <img
-                src="../../assets/figma/logo.png"
-                alt="FEFU One"
-                class="logo-img variant3-logo"
-              />
-              <div class="variant3-hover-overlay">
-                <img
-                  src="../../assets/figma/panel-toggle.svg"
-                  alt="Развернуть"
-                  class="toggle-icon rotate-180"
-                />
-              </div>
-            </div>
           </a-tooltip>
         </div>
       </template>
@@ -402,13 +370,36 @@
       </a-tooltip>
 
       <!-- 2. Bottom Actions Row -->
-      <!-- VARIANT 1: Collapse button is at the bottom -->
-      <template v-if="variant === 1">
-        <!-- Expanded Variant 1: [Return to Map] on Left, [Collapse] on Right -->
-        <div v-if="!collapsed" class="bottom-actions-row">
+      <!-- Expanded: Return to Map takes full width -->
+      <div v-if="!collapsed" class="bottom-actions-row">
+        <a
+          href="/map"
+          class="return-map-btn full-width"
+          @click.prevent="handleReturnToMap"
+        >
+          <svg
+            class="map-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+            <line x1="9" y1="3" x2="9" y2="18" />
+            <line x1="15" y1="6" x2="15" y2="21" />
+          </svg>
+          <span class="map-label">Вернуться на карту</span>
+        </a>
+      </div>
+
+      <!-- Collapsed: Return to Map is a centered 40x40 icon button -->
+      <div v-else class="bottom-actions-collapsed">
+        <a-tooltip title="Вернуться на карту" placement="right">
           <a
             href="/map"
-            class="return-map-btn"
+            class="return-map-btn icon-only"
             @click.prevent="handleReturnToMap"
           >
             <svg
@@ -424,115 +415,9 @@
               <line x1="9" y1="3" x2="9" y2="18" />
               <line x1="15" y1="6" x2="15" y2="21" />
             </svg>
-            <span class="map-label">Вернуться на карту</span>
           </a>
-
-          <a-tooltip title="Свернуть меню" placement="right">
-            <button
-              type="button"
-              class="bottom-toggle-btn"
-              @click="toggleCollapsed"
-            >
-              <img
-                src="../../assets/figma/panel-toggle.svg"
-                alt="Toggle Menu"
-                class="toggle-icon"
-              />
-            </button>
-          </a-tooltip>
-        </div>
-
-        <!-- Collapsed Variant 1: Toggle button is UNDER Theme and ABOVE Map -->
-        <div v-else class="bottom-actions-collapsed">
-          <a-tooltip title="Развернуть меню" placement="right">
-            <button
-              type="button"
-              class="bottom-toggle-btn"
-              @click="toggleCollapsed"
-            >
-              <img
-                src="../../assets/figma/panel-toggle.svg"
-                alt="Toggle Menu"
-                class="toggle-icon rotate-180"
-              />
-            </button>
-          </a-tooltip>
-
-          <a-tooltip title="Вернуться на карту" placement="right">
-            <a
-              href="/map"
-              class="return-map-btn icon-only"
-              @click.prevent="handleReturnToMap"
-            >
-              <svg
-                class="map-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-                <line x1="9" y1="3" x2="9" y2="18" />
-                <line x1="15" y1="6" x2="15" y2="21" />
-              </svg>
-            </a>
-          </a-tooltip>
-        </div>
-      </template>
-
-      <!-- VARIANTS 2 & 3: Collapse button is at the TOP, so bottom ONLY has Return to Map -->
-      <template v-else>
-        <!-- Expanded Variant 2/3: Return to Map takes full width -->
-        <div v-if="!collapsed" class="bottom-actions-row">
-          <a
-            href="/map"
-            class="return-map-btn full-width"
-            @click.prevent="handleReturnToMap"
-          >
-            <svg
-              class="map-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-              <line x1="9" y1="3" x2="9" y2="18" />
-              <line x1="15" y1="6" x2="15" y2="21" />
-            </svg>
-            <span class="map-label">Вернуться на карту</span>
-          </a>
-        </div>
-
-        <!-- Collapsed Variant 2/3: Return to Map is a centered 40x40 icon button -->
-        <div v-else class="bottom-actions-collapsed">
-          <a-tooltip title="Вернуться на карту" placement="right">
-            <a
-              href="/map"
-              class="return-map-btn icon-only"
-              @click.prevent="handleReturnToMap"
-            >
-              <svg
-                class="map-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-                <line x1="9" y1="3" x2="9" y2="18" />
-                <line x1="15" y1="6" x2="15" y2="21" />
-              </svg>
-            </a>
-          </a-tooltip>
-        </div>
-      </template>
+        </a-tooltip>
+      </div>
     </div>
   </a-layout-sider>
 </template>
@@ -556,7 +441,6 @@ import {
 } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import { useTheme } from '../../composables/useTheme'
-import { useSidebarVariant } from '../../composables/useSidebarVariant'
 
 const props = defineProps<{
   collapsed: boolean
@@ -567,7 +451,6 @@ const emit = defineEmits<{
 }>()
 
 const { themeMode, cycleTheme } = useTheme()
-const { variant } = useSidebarVariant()
 
 const themeOptions = [
   { value: 'light' },
@@ -680,15 +563,15 @@ const handleReturnToMap = () => {
   background: var(--fefu-active-bg);
 }
 
-/* Variant 2: Toggle button with background at top in collapsed view */
-.variant2-collapsed-header {
+/* Collapsed Header: Toggle button with background at top */
+.collapsed-header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.variant2-toggle-btn-with-bg {
+.toggle-btn-with-bg {
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -703,71 +586,14 @@ const handleReturnToMap = () => {
   transition: background-color 0.2s, transform 0.2s;
 }
 
-html.dark .variant2-toggle-btn-with-bg {
+html.dark .toggle-btn-with-bg {
   background: rgba(255, 255, 255, 0.08);
 }
 
-.variant2-toggle-btn-with-bg:hover {
+.toggle-btn-with-bg:hover {
   background: var(--fefu-hover-bg);
   border-color: var(--fefu-primary);
   transform: scale(1.04);
-}
-
-/* Variant 3: Hover on logo reveals toggle button */
-.variant3-hover-box {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 8px;
-  position: relative;
-}
-
-.variant3-inner {
-  width: 36px;
-  height: 36px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.variant3-logo {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 1;
-}
-
-.variant3-hover-overlay {
-  position: absolute;
-  inset: -2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--fefu-border);
-  border-radius: 8px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  transform: scale(0.9);
-}
-
-html.dark .variant3-hover-overlay {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.variant3-hover-box:hover .variant3-logo {
-  opacity: 0;
-  transform: scale(0.85);
-}
-
-.variant3-hover-box:hover .variant3-hover-overlay {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
 }
 
 /* Menu Container */
@@ -939,39 +765,6 @@ html.dark .theme-segmented {
   margin: 0 auto;
   border-radius: 8px;
   flex: unset;
-}
-
-/* Bottom Toggle Button */
-.bottom-toggle-btn {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.2s;
-  flex-shrink: 0;
-}
-
-.is-collapsed .bottom-toggle-btn {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: 8px;
-  margin: 0 auto;
-}
-
-.bottom-toggle-btn:hover {
-  background: var(--fefu-hover-bg);
-}
-
-.bottom-toggle-btn:active {
-  background: var(--fefu-active-bg);
 }
 
 .toggle-icon {

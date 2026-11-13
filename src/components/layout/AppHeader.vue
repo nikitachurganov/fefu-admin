@@ -1,6 +1,6 @@
 <template>
   <a-layout-header class="fefu-header">
-    <!-- Left: Search Bar & Variant Switcher -->
+    <!-- Left: Search Bar -->
     <div class="header-left">
       <div class="search-box">
         <img src="../../assets/figma/search.svg" alt="Поиск" class="search-icon" />
@@ -9,21 +9,6 @@
           type="text"
           placeholder="Поиск по сервису"
           class="search-input"
-        />
-      </div>
-
-      <!-- Variant Switcher -->
-      <div class="variant-switcher">
-        <a-segmented
-          :value="variant"
-          :options="[
-            { value: 1, label: 'Вариант 1' },
-            { value: 2, label: 'Вариант 2' },
-            { value: 3, label: 'Вариант 3' }
-          ]"
-          size="small"
-          class="variant-segmented"
-          @change="handleVariantChange"
         />
       </div>
     </div>
@@ -125,15 +110,9 @@ import {
   CustomerServiceOutlined,
   LogoutOutlined
 } from '@ant-design/icons-vue'
-import { useSidebarVariant } from '../../composables/useSidebarVariant'
 
-const { variant, setVariant } = useSidebarVariant()
 const searchQuery = ref('')
 const currentRole = ref('Администратор системы')
-
-const handleVariantChange = (val: unknown) => {
-  setVariant(Number(val) as 1 | 2 | 3)
-}
 
 const handleRoleChange = ({ key }: { key: string }) => {
   currentRole.value = key
@@ -161,15 +140,6 @@ const handleRoleChange = ({ key }: { key: string }) => {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.variant-switcher {
-  display: flex;
-  align-items: center;
-}
-
-.variant-segmented {
-  font-size: 12px;
 }
 
 .search-box {
