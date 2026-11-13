@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+    html, body { margin: 0; padding: 0; font-family: Inter, -apple-system, sans-serif; background: var(--figma-color-bg, #fff); color: var(--figma-color-text, #121212); }
+    #plugin-root { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .title { font-weight: 600; font-size: 14px; }
+    .desc { font-size: 12px; color: var(--figma-color-text-secondary, #666); line-height: 1.4; }
+    .status { font-size: 11px; padding: 6px 10px; border-radius: 6px; background: var(--figma-color-bg-secondary, #f5f5f5); color: var(--figma-color-text, #333); }
+    .status.success { background: #e6f4ff; color: #2d82cf; }
+    .btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    button {
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--figma-color-border, #dfdfdf);
+      background: var(--figma-color-bg, #ffffff);
+      color: var(--figma-color-text, #121212);
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    button:hover {
+      background: var(--figma-color-bg-hover, #f0f0f0);
+    }
+    button.primary {
+      background: #2d82cf;
+      color: #ffffff;
+      border-color: #2d82cf;
+    }
+    button.primary:hover {
+      background: #206ab0;
+    }
+  </style>
+</head>
+<body>
+  <div id="plugin-root">
+    <div class="title">FEFU One Sidebar Generator</div>
+    <div class="desc">
+      Создаёт компоненты сайдбара с <b>Auto Layout</b> и привязанными токенами библиотеки <b>Ant Design</b> (цвета, скругления, дивайдеры).
+    </div>
+
+    <div class="btn-group">
+      <button class="primary" id="btn-both">
+        ✨ Создать оба состояния (300px + 80px)
+      </button>
+      <button id="btn-expanded">
+        Развёрнутый сайдбар (300px)
+      </button>
+      <button id="btn-collapsed">
+        Свёрнутый сайдбар (80px)
+      </button>
+    </div>
+
+    <div id="status" class="status">Готов к генерации</div>
+  </div>
+
+  <script>
+    const post = (msg) => parent.postMessage({ pluginMessage: msg }, '*');
+    
+    document.getElementById('btn-both').addEventListener('click', () => {
+      setStatus('Генерация сайдбаров с автолейаутами...');
+      post({ type: 'create-sidebar', mode: 'both' });
+    });
+    
+    document.getElementById('btn-expanded').addEventListener('click', () => {
+      setStatus('Генерация развёрнутого сайдбара...');
+      post({ type: 'create-sidebar', mode: 'expanded' });
+    });
+    
+    document.getElementById('btn-collapsed').addEventListener('click', () => {
+      setStatus('Генерация свёрнутого сайдбара...');
+      post({ type: 'create-sidebar', mode: 'collapsed' });
+    });
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (msg && msg.type === 'status') {
+        setStatus(msg.text, msg.success);
+      }
+    };
+
+    function setStatus(text, success) {
+      const el = document.getElementById('status');
+      el.textContent = text;
+      el.className = 'status' + (success ? ' success' : '');
+    }
+
+    const root = document.getElementById('plugin-root');
+    new ResizeObserver(() => {
+      post({ type: 'resize', height: Math.ceil(root.getBoundingClientRect().height) });
+    }).observe(root);
+  </script>
+</body>
+</html>
