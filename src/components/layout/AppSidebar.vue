@@ -68,7 +68,7 @@
         <!-- 1. Главная -->
         <a-menu-item key="main">
           <template #icon>
-            <HomeOutlined />
+            <Icon icon="fluent:home-24-filled" class="menu-icon" />
           </template>
           <span>Главная</span>
         </a-menu-item>
@@ -76,7 +76,7 @@
         <!-- 2. Пульс кампуса -->
         <a-sub-menu key="campus-pulse">
           <template #icon>
-            <RiseOutlined />
+            <Icon icon="fluent:pulse-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Пульс кампуса</span>
@@ -97,7 +97,7 @@
         <!-- 3. Активы и объекты -->
         <a-sub-menu key="assets-objects">
           <template #icon>
-            <AppstoreOutlined />
+            <Icon icon="fluent:grid-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Активы и объекты</span>
@@ -110,7 +110,7 @@
         <!-- 4. Имущественный комплекс -->
         <a-sub-menu key="property-complex">
           <template #icon>
-            <BankOutlined />
+            <Icon icon="fluent:building-bank-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Имущественный комплекс</span>
@@ -124,7 +124,7 @@
         <!-- 5. Пользователи -->
         <a-sub-menu key="users">
           <template #icon>
-            <TeamOutlined />
+            <Icon icon="fluent:people-community-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Пользователи</span>
@@ -139,7 +139,7 @@
         <!-- 6. Наука -->
         <a-sub-menu key="science">
           <template #icon>
-            <ExperimentOutlined />
+            <Icon icon="fluent:beaker-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Наука</span>
@@ -151,7 +151,7 @@
         <!-- 7. Транспорт -->
         <a-sub-menu key="transport">
           <template #icon>
-            <CarOutlined />
+            <Icon icon="fluent:vehicle-car-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Транспорт</span>
@@ -162,7 +162,7 @@
         <!-- 8. Типы и классы -->
         <a-menu-item key="types-classes">
           <template #icon>
-            <TagsOutlined />
+            <Icon icon="fluent:tag-multiple-24-filled" class="menu-icon" />
           </template>
           <span>Типы и классы</span>
         </a-menu-item>
@@ -170,7 +170,7 @@
         <!-- 9. Подразделения -->
         <a-menu-item key="departments">
           <template #icon>
-            <ApartmentOutlined />
+            <Icon icon="fluent:organization-24-filled" class="menu-icon" />
           </template>
           <span>Подразделения</span>
         </a-menu-item>
@@ -178,7 +178,7 @@
         <!-- 10. Бронирование -->
         <a-sub-menu key="booking">
           <template #icon>
-            <CalendarOutlined />
+            <Icon icon="fluent:calendar-ltr-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Бронирование</span>
@@ -191,7 +191,7 @@
         <!-- 11. Категории поиска -->
         <a-menu-item key="search-categories">
           <template #icon>
-            <SearchOutlined />
+            <Icon icon="fluent:search-24-filled" class="menu-icon" />
           </template>
           <span>Категории поиска</span>
         </a-menu-item>
@@ -199,7 +199,7 @@
         <!-- 12. Сообщения от пользователей -->
         <a-sub-menu key="user-messages">
           <template #icon>
-            <MessageOutlined />
+            <Icon icon="fluent:chat-multiple-24-filled" class="menu-icon" />
           </template>
           <template #title>
             <span>Сообщения от пользователей</span>
@@ -211,7 +211,7 @@
         <!-- 13. Постоянные ссылки -->
         <a-menu-item key="permanent-links">
           <template #icon>
-            <LinkOutlined />
+            <Icon icon="fluent:link-24-filled" class="menu-icon" />
           </template>
           <span>Постоянные ссылки</span>
         </a-menu-item>
@@ -245,54 +245,23 @@
             >
               <div class="segmented-icon-btn">
                 <!-- Sun Icon (Light) -->
-                <svg
+                <Icon
                   v-if="value === 'light'"
+                  icon="fluent:weather-sunny-24-filled"
                   class="theme-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2" />
-                  <path d="M12 20v2" />
-                  <path d="m4.93 4.93 1.41 1.41" />
-                  <path d="m17.66 17.66 1.41 1.41" />
-                  <path d="M2 12h2" />
-                  <path d="M20 12h2" />
-                  <path d="m6.34 17.66-1.41 1.41" />
-                  <path d="m19.07 4.93-1.41 1.41" />
-                </svg>
+                />
                 <!-- Moon Icon (Dark) -->
-                <svg
+                <Icon
                   v-else-if="value === 'dark'"
+                  icon="fluent:weather-moon-24-filled"
                   class="theme-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                </svg>
+                />
                 <!-- Monitor Icon (System) -->
-                <svg
+                <Icon
                   v-else
+                  icon="fluent:desktop-24-filled"
                   class="theme-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
+                />
               </div>
             </a-tooltip>
           </template>
@@ -318,54 +287,23 @@
           @click="cycleTheme"
         >
           <!-- Sun Icon (Light) -->
-          <svg
+          <Icon
             v-if="themeMode === 'light'"
+            icon="fluent:weather-sunny-24-filled"
             class="theme-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2" />
-            <path d="M12 20v2" />
-            <path d="m4.93 4.93 1.41 1.41" />
-            <path d="m17.66 17.66 1.41 1.41" />
-            <path d="M2 12h2" />
-            <path d="M20 12h2" />
-            <path d="m6.34 17.66-1.41 1.41" />
-            <path d="m19.07 4.93-1.41 1.41" />
-          </svg>
+          />
           <!-- Moon Icon (Dark) -->
-          <svg
+          <Icon
             v-else-if="themeMode === 'dark'"
+            icon="fluent:weather-moon-24-filled"
             class="theme-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-          </svg>
+          />
           <!-- Monitor Icon (System) -->
-          <svg
+          <Icon
             v-else
+            icon="fluent:desktop-24-filled"
             class="theme-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-            <line x1="8" y1="21" x2="16" y2="21" />
-            <line x1="12" y1="17" x2="12" y2="21" />
-          </svg>
+          />
         </button>
       </a-tooltip>
 
@@ -377,19 +315,7 @@
           class="return-map-btn full-width"
           @click.prevent="handleReturnToMap"
         >
-          <svg
-            class="map-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-            <line x1="9" y1="3" x2="9" y2="18" />
-            <line x1="15" y1="6" x2="15" y2="21" />
-          </svg>
+          <Icon icon="fluent:map-24-filled" class="map-icon" />
           <span class="map-label">Вернуться на карту</span>
         </a>
       </div>
@@ -402,19 +328,7 @@
             class="return-map-btn icon-only"
             @click.prevent="handleReturnToMap"
           >
-            <svg
-              class="map-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-              <line x1="9" y1="3" x2="9" y2="18" />
-              <line x1="15" y1="6" x2="15" y2="21" />
-            </svg>
+            <Icon icon="fluent:map-24-filled" class="map-icon" />
           </a>
         </a-tooltip>
       </div>
@@ -424,22 +338,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import {
-  HomeOutlined,
-  RiseOutlined,
-  AppstoreOutlined,
-  BankOutlined,
-  TeamOutlined,
-  ExperimentOutlined,
-  CarOutlined,
-  TagsOutlined,
-  ApartmentOutlined,
-  CalendarOutlined,
-  SearchOutlined,
-  MessageOutlined,
-  LinkOutlined
-} from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
+import { Icon } from '../../icons'
 import { useTheme } from '../../composables/useTheme'
 
 const props = defineProps<{
@@ -601,6 +501,16 @@ html.dark .toggle-btn-with-bg {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu-container::-webkit-scrollbar {

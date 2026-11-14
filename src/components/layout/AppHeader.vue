@@ -79,20 +79,20 @@
             <a-menu-divider />
             <a-menu-item key="instructions">
               <template #icon>
-                <FileTextOutlined />
+                <Icon icon="fluent:document-text-24-filled" class="dropdown-item-icon" />
               </template>
               Инструкции
             </a-menu-item>
             <a-menu-item key="support">
               <template #icon>
-                <CustomerServiceOutlined />
+                <Icon icon="fluent:person-support-24-filled" class="dropdown-item-icon" />
               </template>
               Поддержка
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item key="logout" danger>
               <template #icon>
-                <LogoutOutlined />
+                <Icon icon="fluent:arrow-exit-24-filled" class="dropdown-item-icon" />
               </template>
               Выйти из аккаунта
             </a-menu-item>
@@ -105,11 +105,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import {
-  FileTextOutlined,
-  CustomerServiceOutlined,
-  LogoutOutlined
-} from '@ant-design/icons-vue'
+import { Icon } from '../../icons'
 
 const searchQuery = ref('')
 const currentRole = ref('Администратор системы')
@@ -356,5 +352,12 @@ html.dark .avatar-box {
 
 .font-medium {
   font-weight: 500;
+}
+
+.dropdown-item-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  vertical-align: -2px;
 }
 </style>

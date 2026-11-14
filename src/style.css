@@ -108,12 +108,27 @@ html, body {
   padding: 0 !important;
 }
 
+.fefu-sidebar-menu .ant-menu-item-icon,
+.fefu-sidebar-menu .menu-icon,
+.fefu-sidebar-menu .iconify {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 .fefu-sidebar-menu.ant-menu-inline-collapsed .ant-menu-item-icon,
 .fefu-sidebar-menu.ant-menu-inline-collapsed .ant-menu-submenu-title .ant-menu-item-icon,
-.fefu-sidebar-menu.ant-menu-inline-collapsed .anticon {
-  font-size: 18px !important;
+.fefu-sidebar-menu.ant-menu-inline-collapsed .anticon,
+.fefu-sidebar-menu.ant-menu-inline-collapsed .menu-icon,
+.fefu-sidebar-menu.ant-menu-inline-collapsed .iconify {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
   line-height: 1 !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
